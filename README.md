@@ -14,4 +14,14 @@ The project requires the following:
 * Visual Studio 2013 or MinGW http://www.mingw.org/
 * libusbk: https://sourceforge.net/projects/libusbk/
 
+To create an out-of-source build for Visual Studio 2013:
+
+    mkdir [build_dir]
+    cd [build_dir]
+    cmake -G "Visual Studio 12 Win64" -DLIBUSBK_DIR=[libusbk_bin_dir] [repo_dir]
+
+For example:
+
+    C:\build\libusbk_examples>cmake -G "Visual Studio 12 Win64" -DLIBUSBK_DIR=C:\dev\libusbK-3.0.6.0-bin c:\mgl\libusbk_examples
+
 The project is released under the permissive BSD license.
