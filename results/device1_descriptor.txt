@@ -1,0 +1,152 @@
+This descriptor was produced using kList under Windows 8.1 x64 which is 
+available from the libusbk binary distribution.  The only edit was replacing the
+iManufacturer and iProduct characters with "x" to protect the innocent.  
+
+This device only works when connected to a high-speed host.  The device contains
+one vendor-specific interface with four alternate settings.  The design is 
+loosely based upon the UVC class where commands are sent over control endpoint 0
+and delayed responses are returned over an interrupt channel.  AltSetting 0 
+reserves no resources.  AltSetting 1 is infrequently used for firmware upgrades.
+AltSetting 2 is the when the device is active but not streaming data.  
+AltSetting 3 allows the device to stream data over BULK IN.  AltSetting 4 allows
+the device to stream data over ISO IN.  The device streams data at a maximum of
+21.5 MB/s.
+
+
+-Device:
+  bLength             :18
+  bDescriptorType     :0x01
+  bcdUSB              :0x0200
+  bDeviceClass        :0x00 (Defined at Interface level)
+  bDeviceSubClass     :0x00
+  bDeviceProtocol     :0x00
+  bMaxPacketSize0     :64
+  idVendor            :0x20AB
+  idProduct           :0x0114
+  bcdDevice           :0x0001
+  iManufacturer       :1 (xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)
+  iProduct            :2 (xxxxxxxxxxxxxxxxxxxxxxxxxxx)
+  iSerialNumber       :3 (20313152383438383233303335303235)
+  bNumConfigurations  :1
+!End Device
+-Configuration:
+  bLength             :9
+  bDescriptorType     :0x02
+  wTotalLength        :103
+  bNumInterfaces      :1
+  bConfigurationValue :0x01
+  iConfiguration      :0
+  bmAttributes        :0x80
+  MaxPower            :250 (500ma)
+ -Interface:
+    bLength             :9
+    bDescriptorType     :0x04
+    bInterfaceNumber    :0x00
+    bAlternateSetting   :0x00
+    bNumEndpoints       :0
+    bInterfaceClass     :0xFF (Vendor Specific Class)
+    bInterfaceSubClass  :0x00
+    bInterfaceProtocol  :0x00
+    iInterface          :0
+ !End Interface
+ -Interface:
+    bLength             :9
+    bDescriptorType     :0x04
+    bInterfaceNumber    :0x00
+    bAlternateSetting   :0x01
+    bNumEndpoints       :2
+    bInterfaceClass     :0xFF (Vendor Specific Class)
+    bInterfaceSubClass  :0x00
+    bInterfaceProtocol  :0x00
+    iInterface          :0
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x83
+      bmAttributes        :0x03 (Interrupt)
+      wMaxPacketSize      :64
+      bInterval           :0x05
+   !End Endpoint
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x05
+      bmAttributes        :0x02 (Bulk)
+      wMaxPacketSize      :512
+      bInterval           :0x00
+   !End Endpoint
+ !End Interface
+ -Interface:
+    bLength             :9
+    bDescriptorType     :0x04
+    bInterfaceNumber    :0x00
+    bAlternateSetting   :0x02
+    bNumEndpoints       :1
+    bInterfaceClass     :0xFF (Vendor Specific Class)
+    bInterfaceSubClass  :0x00
+    bInterfaceProtocol  :0x00
+    iInterface          :0
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x83
+      bmAttributes        :0x03 (Interrupt)
+      wMaxPacketSize      :64
+      bInterval           :0x05
+   !End Endpoint
+ !End Interface
+ -Interface:
+    bLength             :9
+    bDescriptorType     :0x04
+    bInterfaceNumber    :0x00
+    bAlternateSetting   :0x03
+    bNumEndpoints       :2
+    bInterfaceClass     :0xFF (Vendor Specific Class)
+    bInterfaceSubClass  :0x00
+    bInterfaceProtocol  :0x00
+    iInterface          :0
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x83
+      bmAttributes        :0x03 (Interrupt)
+      wMaxPacketSize      :64
+      bInterval           :0x05
+   !End Endpoint
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x85
+      bmAttributes        :0x02 (Bulk)
+      wMaxPacketSize      :512
+      bInterval           :0x00
+   !End Endpoint
+ !End Interface
+ -Interface:
+    bLength             :9
+    bDescriptorType     :0x04
+    bInterfaceNumber    :0x00
+    bAlternateSetting   :0x04
+    bNumEndpoints       :2
+    bInterfaceClass     :0xFF (Vendor Specific Class)
+    bInterfaceSubClass  :0x00
+    bInterfaceProtocol  :0x00
+    iInterface          :0
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x83
+      bmAttributes        :0x03 (Interrupt)
+      wMaxPacketSize      :64
+      bInterval           :0x05
+   !End Endpoint
+   -Endpoint:
+      bLength             :7
+      bDescriptorType     :0x05
+      bEndpointAddress    :0x85
+      bmAttributes        :0x01 (Isochronous, No Synchonization, Data Endpoint)
+      wMaxPacketSize      :5120
+      bInterval           :0x01
+   !End Endpoint
+ !End Interface
+!End Configuration

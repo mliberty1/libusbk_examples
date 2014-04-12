@@ -1,0 +1,142 @@
+
+Microsoft (R) Windows Debugger Version 6.3.9600.17029 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Windows\Minidump\041214-13453-01.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Symbol Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       SRV*C:\Temp\symbols*http://msdl.microsoft.com/download/symbols
+OK                                             C:\dev\libusbK-3.0.6.0-bin\bin\sys\amd64
+Symbol search path is: SRV*C:\Temp\symbols*http://msdl.microsoft.com/download/symbols;C:\dev\libusbK-3.0.6.0-bin\bin\sys\amd64
+Executable search path is: 
+Windows 8 Kernel Version 9600 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS Personal
+Built by: 9600.16452.amd64fre.winblue_gdr.131030-1505
+Machine Name:
+Kernel base = 0xfffff800`a9089000 PsLoadedModuleList = 0xfffff800`a934d990
+Debug session time: Sat Apr 12 11:19:10.894 2014 (UTC - 4:00)
+System Uptime: 0 days 2:36:32.645
+Loading Kernel Symbols
+...............................................................
+................................................................
+.......................................................
+Loading User Symbols
+Loading unloaded module list
+.............
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+Use !analyze -v to get detailed debugging information.
+
+BugCheck 10D, {5, 1ffffd4f91d8, 1200, ffffe0000598e4d0}
+
+Probably caused by : libusbK.sys ( libusbK!Pipe_InitContext+cb )
+
+Followup: MachineOwner
+---------
+
+2: kd> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Bugcheck Analysis                                    *
+*                                                                             *
+*******************************************************************************
+
+WDF_VIOLATION (10d)
+The Kernel-Mode Driver Framework was notified that Windows detected an error
+in a framework-based driver. In general, the dump file will yield additional
+information about the driver that caused this bug check.
+Arguments:
+Arg1: 0000000000000005, A framework object handle of the incorrect type was passed to
+	a framework object method.
+Arg2: 00001ffffd4f91d8, The handle value passed in.
+Arg3: 0000000000001200, Reserved.
+Arg4: ffffe0000598e4d0, Reserved.
+
+Debugging Details:
+------------------
+
+
+BUGCHECK_STR:  0x10D_5
+
+CUSTOMER_CRASH_COUNT:  1
+
+DEFAULT_BUCKET_ID:  WIN8_DRIVER_FAULT
+
+PROCESS_NAME:  altsetting.exe
+
+CURRENT_IRQL:  0
+
+ANALYSIS_VERSION: 6.3.9600.17029 (debuggers(dbg).140219-1702) amd64fre
+
+LAST_CONTROL_TRANSFER:  from fffff800003a5caa to fffff800a91d6ca0
+
+STACK_TEXT:  
+ffffd000`3ba861b8 fffff800`003a5caa : 00000000`0000010d 00000000`00000005 00001fff`fd4f91d8 00000000`00001200 : nt!KeBugCheckEx
+ffffd000`3ba861c0 fffff800`00378673 : ffffe000`02b06e20 ffffe000`07c402f0 00001fff`fd4f91d8 fffff800`003bc8d5 : Wdf01000!FxVerifierBugCheck+0x1e
+ffffd000`3ba86200 fffff800`003ae039 : 00001fff`fd4f91d8 00001fff`ff332458 ffffd000`7562696c fffff800`003b3aef : Wdf01000!FxObjectHandleGetPtrQI+0x3c927
+ffffd000`3ba86270 fffff800`03e1310b : ffffd000`3ba86350 ffffe000`05980000 00000000`00000000 00000000`00000001 : Wdf01000!imp_WdfIoTargetStart+0x6a
+ffffd000`3ba862b0 fffff800`03e11d47 : 00000000`c0000000 00000000`00000000 ffffe000`07c40b30 ffffe000`07c402f0 : libusbK!Pipe_InitContext+0xcb [z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_pipe.c @ 432]
+ffffd000`3ba862e0 fffff800`03e1213a : 00000000`c0000001 ffffe000`07c402f0 ffffe000`07c402f0 ffffd000`3ba863f0 : libusbK!Interface_Start+0x37 [z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_interface.c @ 86]
+ffffd000`3ba86310 fffff800`03e1689b : 00000000`00000000 ffffe000`07c402f0 00000000`00000000 00001fff`f83bfff8 : libusbK!Interface_SetAltSetting+0x24e [z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_interface.c @ 232]
+ffffd000`3ba863b0 fffff800`003329ce : ffffe000`07ad9b70 ffffe000`059d66d0 00000000`00000018 00001fff`f8526488 : libusbK!DefaultQueue_OnIoControl+0x13a3 [z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_queue_default.c @ 376]
+ffffd000`3ba86460 fffff800`00332123 : ffffe000`0598e401 00000000`00000000 00000000`00000000 fffff800`0034161a : Wdf01000!FxIoQueue::DispatchRequestToDriver+0x1be
+ffffd000`3ba86530 fffff800`003392f2 : ffffe000`059d66d0 ffffd000`3ba86600 00000000`00000000 ffffe000`059d6701 : Wdf01000!FxIoQueue::DispatchEvents+0x363
+ffffd000`3ba865f0 fffff800`00339658 : 00000067`ddbfce01 ffffe000`07ad7840 ffffc000`11d1b700 ffffc000`20200000 : Wdf01000!FxPkgIo::EnqueueRequest+0x252
+ffffd000`3ba866c0 fffff800`03e12c30 : ffffe000`07ad9d10 ffffe000`07c40000 00000000`00000000 ffffe000`07ad9b70 : Wdf01000!imp_WdfDeviceEnqueueRequest+0xc9
+ffffd000`3ba86720 fffff800`003369bd : 00000000`00000001 00001fff`f8526488 ffffe000`04b54840 00000000`00000018 : libusbK!Request_PreIoInitialize+0x130 [z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_request.c @ 304]
+ffffd000`3ba86790 fffff800`a94343e5 : 00000000`00000000 ffffd000`3ba86b01 ffffe000`07c40001 fffff800`00000001 : Wdf01000!FxDevice::DispatchWithLock+0x77d
+ffffd000`3ba86870 fffff800`a9434d7a : ffffd000`3ba86a38 00000067`00000000 00000000`00000000 00000067`ddb1fad0 : nt!IopXxxControlFile+0x845
+ffffd000`3ba86a20 fffff800`a91e24b3 : ffffe000`04fa8080 ffffd000`001f0003 00000067`ddb1fa08 fffff800`00000000 : nt!NtDeviceIoControlFile+0x56
+ffffd000`3ba86a90 00007ff9`6d2265ea : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : nt!KiSystemServiceCopyEnd+0x13
+00000067`ddb1f9c8 00000000`00000000 : 00000000`00000000 00000000`00000000 00000000`00000000 00000000`00000000 : 0x00007ff9`6d2265ea
+
+
+STACK_COMMAND:  kb
+
+FOLLOWUP_IP: 
+libusbK!Pipe_InitContext+cb [z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_pipe.c @ 432]
+fffff800`03e1310b 8bf8            mov     edi,eax
+
+FAULTING_SOURCE_LINE:  z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_pipe.c
+
+FAULTING_SOURCE_FILE:  z:\svnmain\googlecode\usb-travis\trunk\libusbk\src\sys\drv_pipe.c
+
+FAULTING_SOURCE_LINE_NUMBER:  432
+
+SYMBOL_STACK_INDEX:  4
+
+SYMBOL_NAME:  libusbK!Pipe_InitContext+cb
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: libusbK
+
+IMAGE_NAME:  libusbK.sys
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  5207c443
+
+IMAGE_VERSION:  3.0.6.0
+
+BUCKET_ID_FUNC_OFFSET:  cb
+
+FAILURE_BUCKET_ID:  0x10D_5_libusbK!Pipe_InitContext
+
+BUCKET_ID:  0x10D_5_libusbK!Pipe_InitContext
+
+ANALYSIS_SOURCE:  KM
+
+FAILURE_ID_HASH_STRING:  km:0x10d_5_libusbk!pipe_initcontext
+
+FAILURE_ID_HASH:  {fbb003e7-b70a-0bc3-4274-781915951631}
+
+Followup: MachineOwner
+---------
+

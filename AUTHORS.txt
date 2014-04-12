@@ -1,0 +1,4 @@
+Matt Liberty, Jetperch LLC
+
+Special thanks to Travis Robinson and other libusbk contributors on which these
+examples are based.
