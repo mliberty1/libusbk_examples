@@ -1,4 +1,4 @@
-# Copyright 2014 Jetperch LLC.  All rights reserved.
+# Copyright 2014 Jetperch LLC.  See LICENSE.txt
 # libusbk_examples
 
 cmake_minimum_required (VERSION 2.8) 

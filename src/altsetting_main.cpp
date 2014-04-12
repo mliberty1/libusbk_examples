@@ -5,7 +5,7 @@
  * 
  * \brief Rapidly switch device alternate settings.
  *
- * This examples was created to isolate and demonstate a WDF_Violation and 
+ * This examples was created to isolate and demonstrate a WDF_Violation and 
  * Blue Screen of Death (BSoD).  The BSoD appears to occur when the device
  * is removed (unplugged) while switching alternate settings.  The original
  * problem was presumed to be when switching away from an altsetting with

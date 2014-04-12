@@ -1,4 +1,4 @@
-# Copyright 2014 Jetperch LLC.  All rights reserved.
+# Copyright 2014 Jetperch LLC.  See LICENSE.txt
 # libusbk_examples/src
 
 add_executable(altsetting
@@ -6,6 +6,7 @@ add_executable(altsetting
     log.c
     log.h
     log_api.h
+    portable_string.h
 )
 target_link_libraries(altsetting ${LIBUSBK_LIBS})
 install(TARGETS altsetting DESTINATION "bin")

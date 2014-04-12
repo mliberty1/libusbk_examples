@@ -1,9 +1,9 @@
-// Copyright 2013 Jetperch LLC.  All rights reserved.
+/* Copyright 2013 Jetperch LLC.  See LICENSE.txt */
 
 #ifndef PORTABLE_STRING_H_
 #define PORTABLE_STRING_H_
 
-// Just because of Microsoft's lazy stance on C99...
+/* Just because of Microsoft's lazy stance on C99... */
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -35,9 +35,9 @@ int c99_snprintf(char* str, size_t size, const char* format, ...) {
 	return count;
 }
 
-#else // _MSC_VER
+#else /* _MSC_VER */
 #define c99_vsnprintf vsnprintf
 #define c99_snprintf snprintf
 #endif
 
-#endif // PORTABLE_STRING_H_
+#endif /* PORTABLE_STRING_H_ */

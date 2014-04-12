@@ -1,4 +1,4 @@
-/* Copyright 2013 Jetperch LLC.  All rights reserved. */
+/* Copyright 2013 Jetperch LLC.  See LICENSE.txt */
 
 /*!
  * \file

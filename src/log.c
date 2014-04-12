@@ -1,5 +1,4 @@
-/* Copyright 2013 Jetperch LLC.  All rights reserved. */
-
+/* Copyright 2013 Jetperch LLC.  See LICENSE.txt */
 #include "log.h"
 #include "portable_string.h"
 #include <Windows.h>
