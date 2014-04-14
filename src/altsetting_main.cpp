@@ -58,6 +58,8 @@ typedef std::map< std::string, std::shared_ptr<Device> > PathMapT;
 static PathMapT pathMap;
 static bool doExit_ = false;
 static uint8_t altsetting = 0;
+static int usb_vid = EXAMPLE_VID;
+static int usb_pid = EXAMPLE_PID;
 
 /* Console control handler - exit on any signal. */
 BOOL CtrlHandler(DWORD fdwCtrlType) {
@@ -150,6 +152,7 @@ public:
 	 * \return true on success, false on error.
 	 */
 	bool perform() {
+		bool return_value = true;
 		if (error_count_ > 0) {
 			// Be gentle: Do not perform if this device is already has an error.
 			return false;
@@ -166,14 +169,14 @@ public:
 		if ((libusbk_handle != NULL) && !libusbk_usb.SetCurrentAlternateSetting(libusbk_handle, next_altsetting)) {
 			LOGF_WARN("SetCurrentAlternateSetting failed: %08Xh", GetLastError());
 			++error_count_;
-			return false;
+			return_value = false;
 		}
 		QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&time_end));
 		double result = static_cast<double>(time_end - time_start) / static_cast<float>(time_frequency);
 		int32_t time_ms = static_cast<int32_t>(result * 1000.0);
 		LOGF_NOTICE("SetCurrentAlternateSetting(%d) took %d ms", next_altsetting, time_ms);
 		current_altsetting_ = next_altsetting;
-		return true;
+		return return_value;
 	}
 
 public:
@@ -192,7 +195,7 @@ public:
  * \return true for devices of interest, false otherwise.
  */
 static bool device_filter(KLST_DEVINFO const * deviceInfo) {
-	return ((deviceInfo->Common.Vid == EXAMPLE_VID) && (deviceInfo->Common.Pid == EXAMPLE_PID));
+	return ((deviceInfo->Common.Vid == usb_vid) && (deviceInfo->Common.Pid == usb_pid));
 }
 
 /*!
@@ -268,9 +271,12 @@ static int device_scan() {
 
 /// Print the command-line usage.
 void usage() {
-	printf("usage: altsetting.exe [--altsetting int]\n");
+	printf("usage: altsetting.exe [--altsetting int] [--vid int] [--pid int]\n");
 	printf("   altsetting    The alternate setting to use.  If not provided, then detect\n"
 		   "                 the first alternate setting with an isochronous endpoint.\n");
+	printf("    vid          The USB vendor ID for the device filter.\n");
+	printf("    pid          The USB product ID for the device filter.\n");
+	printf("\n");
 }
 
 /*!
@@ -285,6 +291,15 @@ int main(int argc, char* argv[]) {
 	while (argc) {
 		if (argc >= 2 && strcmp(argv[0], "--altsetting") == 0) {
 			altsetting = atoi(argv[1]);
+			argc -= 2;
+			argv += 2;
+		}
+		else if (argc >= 2 && strcmp(argv[0], "--vid") == 0) {
+			usb_vid = atoi(argv[1]);
+			argc -= 2;
+			argv += 2;
+		} else if (argc >= 2 && strcmp(argv[0], "--pid") == 0) {
+			usb_pid = atoi(argv[1]);
 			argc -= 2;
 			argv += 2;
 		} else {
